@@ -25,4 +25,8 @@ public class RecipeFacade {
     public Recipe insertRecipe(Recipe recipe) throws RecipeException {
         return service.insertRecipe(recipe);
     }
+
+    public Recipe updateRecipe(Recipe recipe) throws RecipeException {
+        return service.updateRecipe(recipe);
+    }
 }

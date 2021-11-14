@@ -40,4 +40,16 @@ public class RecipeController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PutMapping("/recipes")
+    public ResponseEntity<String> updateRecipe(@RequestBody Recipe recipe) {
+        try {
+            Recipe updatedRecipe = facade.updateRecipe(recipe);
+            URI location = URI.create(String.format("/recipes/%s", updatedRecipe.getName()));
+            return ResponseEntity.created(location).build();
+        } catch (RecipeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

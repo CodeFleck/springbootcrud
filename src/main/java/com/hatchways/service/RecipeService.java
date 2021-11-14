@@ -52,4 +52,16 @@ public class RecipeService {
         RecipeHelper.insertRecipeData(recipes);
         return recipe;
     }
+
+    public Recipe updateRecipe(Recipe recipe) throws RecipeException{
+        RecipeList recipes = RecipeHelper.getRecipesData();
+        Optional<Recipe> recipeOptional = findRecipeByName(recipes, recipe.getName());
+        if (!recipeOptional.isPresent()) {
+            throw new RecipeException("Recipe does not exist");
+        }
+        recipes.getRecipes().remove(recipeOptional.get());
+        recipes.getRecipes().add(recipe);
+        RecipeHelper.insertRecipeData(recipes);
+        return recipe;
+    }
 }
